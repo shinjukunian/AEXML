@@ -104,4 +104,15 @@ open class AEXMLDocument: AEXMLElement {
         return xml
     }
     
+    open override func xmlString(seperator: String = "\n", escape: Bool = true, compact: Bool = true) -> String {
+        var xml =  "\(options.documentHeader.xmlString)\(seperator)"
+        xml += root.xmlString(seperator: seperator, escape: escape, compact: compact)
+        return xml
+    }
+    
+    open override var xmlCompact: String{
+        let xml=self.xmlString(seperator: self.options.lineSeparator, escape: self.options.escape, compact: true)
+        return xml
+    }
+    
 }

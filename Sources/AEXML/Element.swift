@@ -305,6 +305,69 @@ open class AEXMLElement {
         return xml
     }
     
+    
+    func xmlString(seperator:String = "\n", escape:Bool = true, compact:Bool = true)->String{
+        var xml = String()
+        
+        // open element
+        if compact == false{
+            xml += indent(withDepth: parentsCount - 1)
+        }
+        
+        xml += "<\(name)"
+        
+        if attributes.count > 0 {
+            // insert attributes
+            for (key, value) in attributes {
+                if escape == false{
+                    xml += " \(key)=\"\(value)\""
+                }
+                else{
+                    xml += " \(key)=\"\(value.xmlEscaped)\""
+                }
+                
+            }
+        }
+        
+        if value == nil && children.count == 0 {
+            // close element
+            xml += " />"
+        } else {
+            if children.count > 0 {
+                // add children
+                if compact{
+                    xml += ">"
+                    for child in children {
+                        xml += "\(child.xmlString(seperator: seperator, escape: escape, compact: compact))"
+                    }
+                    // add indentation
+                    xml += "</\(name)>"
+                }
+                else{
+                    xml += ">\(seperator)"
+                    for child in children {
+                        xml += "\(child.xmlString(seperator: seperator, escape: escape, compact: compact))\(seperator)"
+                    }
+                    // add indentation
+                    xml += indent(withDepth: parentsCount - 1)
+                    xml += "</\(name)>"
+                }
+                
+            } else {
+                // insert string value and close element
+                if escape{
+                    xml += ">\(string.xmlEscaped)</\(name)>"
+                }
+                else{
+                    xml += ">\(string)</\(name)>"
+                }
+                
+            }
+        }
+        
+        return xml
+    }
+    
     /// Same as `xmlString` but without `\n` and `\t` characters
     open var xmlCompact: String {
         let chars = CharacterSet(charactersIn: "\n\t")

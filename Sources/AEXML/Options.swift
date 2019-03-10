@@ -47,6 +47,10 @@ public struct AEXMLOptions {
     /// Settings used by `Foundation.XMLParser` (defaults to `ParserSettings()`)
     public var parserSettings = ParserSettings()
     
+    public var lineSeparator:String = "\n"
+    
+    public var escape:Bool = false
+    
     /// Designated initializer - Creates and returns default `AEXMLOptions`.
     public init() {}
     
