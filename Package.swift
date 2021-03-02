@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 
 /**
  *  https://github.com/tadija/AEXML
@@ -12,7 +12,7 @@ let package = Package(
     name: "AEXML",
     platforms: [
         .macOS(.v10_10),
-        .iOS(.v8),
+        .iOS(.v12),
         .tvOS(.v9),
         .watchOS(.v3)
     ],
