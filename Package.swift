@@ -2,8 +2,8 @@
 
 /**
  *  https://github.com/tadija/AEXML
- *  Copyright (c) Marko Tadić 2014-2019
- *  Licensed under the MIT license. See LICENSE file.
+ *  Copyright © Marko Tadić 2014-2020
+ *  Licensed under the MIT license
  */
 
 import PackageDescription
@@ -11,8 +11,8 @@ import PackageDescription
 let package = Package(
     name: "AEXML",
     platforms: [
+        .iOS(.v9),
         .macOS(.v10_10),
-        .iOS(.v12),
         .tvOS(.v9),
         .watchOS(.v3)
     ],
@@ -27,7 +27,10 @@ let package = Package(
         ),
         .testTarget(
             name: "AEXMLTests",
-            dependencies: ["AEXML"]
-        )
+            dependencies: ["AEXML"],
+            resources: [
+                .copy("Resources"),
+            ]
+        ),
     ]
 )
